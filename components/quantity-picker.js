@@ -19,7 +19,6 @@ const styleDef = css`
     color: inherit;
     padding: 5px 10px;
     position: relative;
-    //left: calc(-5px + -1ch);
     cursor: pointer;
   }
 
