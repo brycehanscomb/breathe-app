@@ -10,6 +10,13 @@ const styleDef = css`
     display: block;
   }
 
+  .root {
+    width: 8em;
+    height: 8em;
+    padding-left: 8em;
+    padding-top: 8em;
+  }
+
   .watch-face {
     position: relative;
   }
@@ -64,6 +71,8 @@ export default class CirclesViz extends HTMLElement {
     const style = document.createElement("style");
 
     style.textContent = styleDef;
+
+    root.className = "root";
 
     root.innerHTML = `
     <div class="watch-face" style="--c0: #529ca0; --c1: #61bea2;">

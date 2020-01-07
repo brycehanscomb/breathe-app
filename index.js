@@ -6,6 +6,7 @@ customElements.define("circles-viz", CirclesViz);
 
 const minutesPicker = document.querySelector("quantity-picker");
 const circlesViz = document.querySelector("circles-viz");
+const minutesLabel = document.querySelector(".minutes-label");
 
 const MIN_MINUTES = 1;
 const MAX_MINUTES = 5;
@@ -24,4 +25,10 @@ const render = state => {
   minutesPicker.setAttribute("value", state.minutes.toString());
   const circlesToShow = 7 + (state.minutes - 1);
   circlesViz.setAttribute("quantity", circlesToShow.toString());
+
+  if (state.minutes === 1) {
+    minutesLabel.classList.add("hidden");
+  } else {
+    minutesLabel.classList.remove("hidden");
+  }
 };

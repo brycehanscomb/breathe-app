@@ -7,17 +7,16 @@
     <script type="module" src="index.js" defer></script>
   </head>
   <body>
-    <div class="time-picker">
-      <quantity-picker value="1"></quantity-picker>
-      min.
+    <div class="column">
+      <h1 class="title">Breathe</h1>
+      <div class="row">
+        <circles-viz class="circles" expanded quantity="7"></circles-viz>
+        <div class="time-picker">
+          <quantity-picker value="1"></quantity-picker>
+          minute<span class="minutes-label hidden">s</span>
+        </div>
+      </div>
+      <button class="button start-button">Start</button>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <circles-viz expanded quantity="7"></circles-viz>
   </body>
 </html>
