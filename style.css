@@ -79,3 +79,15 @@ body {
 .minutes-label.hidden {
   opacity: 0;
 }
+
+#step-1 {
+  transition: opacity 0.5s linear;
+}
+
+#step-1.inactive {
+  opacity: 0;
+}
+
+#step-1.active {
+  opacity: 1;
+}
