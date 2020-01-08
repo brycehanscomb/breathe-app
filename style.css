@@ -44,6 +44,12 @@ body {
   align-items: center;
 }
 
+@media screen and (max-width: 480px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
 .button {
   -webkit-appearance: none;
   -moz-appearance: none;
