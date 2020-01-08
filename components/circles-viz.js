@@ -30,36 +30,25 @@ const styleDef = css`
     background: var(--c1);
     mix-blend-mode: screen;
     transform: rotate(var(--ca)) translate(var(--r));
+    transition: all 0.2s ease;
+  }
+
+  .circle.out {
+    opacity: 0;
   }
 `;
 
-/**
- * @see https://css-tricks.com/simplifying-apple-watch-breathe-app-animation-css-variables/
- * @param {number} quantity
- * @returns {string}
- */
-const createCircles = quantity => {
-  const ba = 360 / quantity;
-  let result = "";
-
-  for (let ii = 0; ii < quantity; ii++) {
-    const angle = (ii + 0.5) * ba - 90;
-    result += `<div class="circle" style="--ca: ${angle}deg;"></div>`;
-  }
-
-  return result;
-};
-
 export default class CirclesViz extends HTMLElement {
   static get observedAttributes() {
-    return ["expanded", "quantity"];
+    return ["expanded", "quantity", "max"];
   }
 
   get props() {
     const expandedAttr = this.attributes.getNamedItem("expanded");
     return {
       expanded: expandedAttr ? expandedAttr.specified : false,
-      quantity: parseInt(this.attributes.getNamedItem("quantity").value, 10)
+      quantity: parseInt(this.attributes.getNamedItem("quantity").value, 10),
+      max: parseInt(this.attributes.getNamedItem("max").value, 10)
     };
   }
 
@@ -75,9 +64,14 @@ export default class CirclesViz extends HTMLElement {
     root.className = "root";
 
     root.innerHTML = `
-    <div class="watch-face" style="--c0: #529ca0; --c1: #61bea2;">
-        ${createCircles(this.props.quantity)}
-    </div>
+    <div class="watch-face" style="--c0: #529ca0; --c1: #61bea2;">${new Array(
+      this.props.max
+    )
+      .fill(null)
+      .map((_, index) => {
+        return `<div class="circle"></div>`;
+      })
+      .join("")}</div>
 `;
 
     shadow.appendChild(root);
@@ -95,8 +89,26 @@ export default class CirclesViz extends HTMLElement {
   }
 
   render() {
-    this.shadowRoot.querySelector(".watch-face").innerHTML = createCircles(
-      this.props.quantity
-    );
+    this.setCircleNodes(this.props.quantity);
+  }
+
+  /**
+   * @see https://css-tricks.com/simplifying-apple-watch-breathe-app-animation-css-variables/
+   * @param {number} quantity
+   */
+  setCircleNodes(quantity) {
+    const ba = 360 / quantity;
+
+    [...this.shadowRoot.querySelectorAll(".circle")].forEach((node, index) => {
+      const angle = (index + 0.5) * ba - 90;
+
+      if (index >= this.props.quantity) {
+        node.className = "circle out";
+      } else {
+        node.className = "circle in";
+      }
+
+      node.setAttribute("style", `--ca: ${angle}deg;`);
+    });
   }
 }
