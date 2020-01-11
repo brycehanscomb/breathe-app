@@ -8,21 +8,24 @@
     <script type="module" src="index.js" defer></script>
   </head>
   <body>
-    <div id="step-1" class="column inactive">
-      <h1 class="title">Breathe</h1>
-      <div class="row">
-        <circles-viz
-          class="circles"
-          expanded
-          quantity="7"
-          max="11"
-        ></circles-viz>
-        <div class="time-picker">
-          <quantity-picker value="1"></quantity-picker>
-          minute<span class="minutes-label hidden">s</span>
+    <dynamic-section id="step-manager" active-section="0">
+      <div slot="0" id="step-1" class="column">
+        <h1 class="title">Breathe</h1>
+        <div class="row">
+          <circles-viz
+            class="circles"
+            expanded
+            quantity="7"
+            max="11"
+          ></circles-viz>
+          <div class="time-picker">
+            <quantity-picker value="1"></quantity-picker>
+            minute<span class="minutes-label hidden">s</span>
+          </div>
         </div>
+        <button class="button start-button">Start</button>
       </div>
-      <button class="button start-button">Start</button>
-    </div>
+      <h2 slot="1">Hello I am in section 1</h2>
+    </dynamic-section>
   </body>
 </html>

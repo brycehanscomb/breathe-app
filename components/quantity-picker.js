@@ -44,8 +44,6 @@ export default class QuantityPicker extends HTMLElement {
   constructor() {
     super();
 
-    const value = this.currentValue;
-
     const shadow = this.attachShadow({ mode: "open" });
     const wrapper = document.createElement("div");
 

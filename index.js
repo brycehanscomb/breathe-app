@@ -1,19 +1,22 @@
 import QuantityPicker from "./components/quantity-picker.js";
 import CirclesViz from "./components/circles-viz.js";
+import DynamicSection from "./components/dynamic-section.js";
 
 customElements.define("quantity-picker", QuantityPicker);
 customElements.define("circles-viz", CirclesViz);
+customElements.define("dynamic-section", DynamicSection);
 
 const minutesPicker = document.querySelector("quantity-picker");
 const circlesViz = document.querySelector("circles-viz");
 const minutesLabel = document.querySelector(".minutes-label");
 const startButton = document.querySelector(".start-button");
+const stepManager = document.getElementById("step-manager");
 
 const MIN_MINUTES = 1;
 const MAX_MINUTES = 5;
 
 let state = {
-  currentStep: 1,
+  currentStep: 0,
   minutes: 1
 };
 
@@ -53,20 +56,7 @@ const render = state => {
     minutesLabel.classList.remove("hidden");
   }
 
-  const step1Container = document.getElementById("step-1");
-
-  if (state.currentStep === 1) {
-    step1Container.style.display = "flex";
-    step1Container.classList.remove("inactive");
-    step1Container.classList.add("active");
-  } else {
-    step1Container.classList.remove("active");
-    step1Container.classList.add("inactive");
-
-    setTimeout(() => {
-      step1Container.style.display = "none";
-    }, 500);
-  }
+  stepManager.setAttribute("active-section", state.currentStep);
 };
 
 render(state);
