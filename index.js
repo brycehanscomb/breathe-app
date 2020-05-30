@@ -1,10 +1,12 @@
 import QuantityPicker from "./components/quantity-picker.js";
 import CirclesViz from "./components/circles-viz.js";
 import DynamicSection from "./components/dynamic-section.js";
+import PulsingCircles from "./components/pulsing-circles.js";
 
 customElements.define("quantity-picker", QuantityPicker);
 customElements.define("circles-viz", CirclesViz);
 customElements.define("dynamic-section", DynamicSection);
+customElements.define("pulsing-circles", PulsingCircles);
 
 const minutesPicker = document.querySelector("quantity-picker");
 const circlesViz = document.querySelector("circles-viz");
